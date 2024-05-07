@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { BASE_URL } from "../constants";
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
     const checkUserLoggedIn = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:7777/profile`, {
+        const res = await fetch(`${BASE_URL}/profile`, {
           credentials: "include",
         });
         const data = await res.json();
