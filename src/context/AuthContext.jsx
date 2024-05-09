@@ -19,6 +19,11 @@ export const AuthContextProvider = ({ children }) => {
           credentials: "include",
         });
         console.log(res);
+        // check if status code is 401
+        if (res.status === 401) {
+          alert("Please enable cookies to use this app.");
+        }
+
         const data = await res.json();
         console.log(data);
         setAuthUser(data.user); // null or authenticated user object
