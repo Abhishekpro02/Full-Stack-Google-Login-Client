@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "./context/AuthContext";
+import { BASE_URL } from "./constants";
 
 const Navbar = () => {
   const { authUser, setAuthUser } = useAuthContext();
@@ -9,7 +10,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch(`/api/logout`, {
+      const res = await fetch(`${BASE_URL}/api/logout`, {
         credentials: "include",
       });
       const data = await res.json();

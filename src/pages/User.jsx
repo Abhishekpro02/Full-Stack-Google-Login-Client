@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
+import { BASE_URL } from "../constants";
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ const User = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`/api/users`, {
+        const res = await fetch(`${BASE_URL}/api/users`, {
           credentials: "include",
         });
         const data = await res.json();
