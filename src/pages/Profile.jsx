@@ -25,9 +25,18 @@ const Profile = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "column",
         height: "100vh",
+        gap: "20px",
       }}
     >
+      <h1
+        style={{
+          color: "purple",
+        }}
+      >
+        My Profile Details 🐰🐰
+      </h1>
       <div
         style={{
           border: "1px solid #ccc",

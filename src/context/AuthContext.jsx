@@ -15,9 +15,10 @@ export const AuthContextProvider = ({ children }) => {
     const checkUserLoggedIn = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${BASE_URL}/profile`, {
+        const res = await fetch(`/api/profile`, {
           credentials: "include",
         });
+        console.log(res);
         const data = await res.json();
         console.log(data);
         setAuthUser(data.user); // null or authenticated user object
