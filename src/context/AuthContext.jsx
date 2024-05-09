@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
     const checkUserLoggedIn = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${BASE_URL}/api/profile`, {
+        const res = await fetch(`/api/profile`, {
           credentials: "include",
         });
         console.log(res);

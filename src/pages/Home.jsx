@@ -1,28 +1,52 @@
 import React from "react";
-import GoogleButton from "react-google-button";
-import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../constants";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    // window.location.href = "https://backend-test-ruddy.vercel.app/auth/github"
-    window.open(`${BASE_URL}/api/auth/google`, "_self");
-    // window.location.href = "/dashboard"
-  };
   return (
-    <div className="container">
-      <h1
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Welcome to Precogs AI</h1>
+      <h2
         style={{
-          color: "blue",
+          color: "#430694",
         }}
       >
-        Google Login Testing{" "}
-      </h1>
-      <GoogleButton onClick={handleLogin} />
+        Google OAuth with React
+      </h2>
+      <p style={styles.paragraph}>
+        This is a simple application to demonstrate Google OAuth with React
+        ,passport.js and Node.js.
+      </p>
+
+      <p style={styles.paragraph}>
+        <Link to="/login" style={styles.link}>
+          Go to Login Page
+        </Link>
+        .
+      </p>
     </div>
   );
 };
 
 export default Home;
+
+const styles = {
+  container: {
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  heading: {
+    fontSize: "2rem",
+    marginBottom: "20px",
+    color: "#f50f72",
+  },
+  paragraph: {
+    fontSize: "1.2rem",
+    marginBottom: "10px",
+    marginTop: "10px",
+  },
+  link: {
+    color: "#007bff",
+    textDecoration: "none",
+    fontWeight: "bold",
+  },
+};

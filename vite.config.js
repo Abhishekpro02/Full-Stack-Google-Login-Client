@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "https://google-login-test-sysc.onrender.com",
+      "/api": "https://google-login-deployment-test.onrender.com",
     },
   },
 });
