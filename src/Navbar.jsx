@@ -8,9 +8,23 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
+  const handleLogout2 = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/logout`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+      setAuthUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const handleLogout = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/logout`, {
+        method: "DELETE",
         credentials: "include",
       });
       const data = await res.json();
