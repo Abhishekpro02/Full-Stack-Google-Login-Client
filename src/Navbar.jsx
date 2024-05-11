@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout2 = async () => {
+  const handleLogout = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/logout`, {
         credentials: "include",
@@ -21,7 +21,7 @@ const Navbar = () => {
       console.log(error.message);
     }
   };
-  const handleLogout = async () => {
+  const handleLogout2 = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/logout`, {
         method: "DELETE",
