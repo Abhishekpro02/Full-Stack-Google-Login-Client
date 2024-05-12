@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../constants";
 
 export const AuthContext = createContext();
@@ -10,36 +10,31 @@ export const useAuthContext = () => {
 export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const isInitialRender = useRef(true);
 
   useEffect(() => {
-    if (!isInitialRender.current) {
-      const checkUserLoggedIn = async () => {
-        setLoading(true);
-        try {
-          const res = await fetch(`${BASE_URL}/api/profile`, {
-            credentials: "include",
-          });
-          console.log(res);
+    const checkUserLoggedIn = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${BASE_URL}/api/profile`, {
+          credentials: "include",
+        });
+        console.log(res);
 
-          const data = await res.json();
-          console.log(data);
-          setAuthUser(data.user); // null or authenticated user object
+        const data = await res.json();
+        console.log(data);
+        setAuthUser(data.user); // null or authenticated user object
 
-          // check if status code is 401
-          if (res.status === 401) {
-            alert("Please enable cookies to use this app.");
-          }
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
+        // check if status code is 401
+        if (res.status === 401) {
+          alert("Please enable cookies to use this app.");
         }
-      };
-      checkUserLoggedIn();
-    } else {
-      isInitialRender.current = false;
-    }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUserLoggedIn();
   }, [setAuthUser]);
 
   return (
