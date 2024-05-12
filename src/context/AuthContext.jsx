@@ -44,8 +44,11 @@ export const AuthContextProvider = ({ children }) => {
           const data = await res.json();
           console.log(data);
           setAuthUser(data.user); // null or authenticated user object
+        } else if (res.status === 401) {
+          // Show non-blocking alert for 401 status
+          window.alert("Please enable cookies to use this app.");
         } else {
-          // Handle non-200 status codes, e.g., logout the user
+          // Handle other non-200 status codes
           setAuthUser(null);
           navigate("/");
         }
