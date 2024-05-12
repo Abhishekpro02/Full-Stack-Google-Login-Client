@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../constants";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -11,7 +10,6 @@ export const useAuthContext = () => {
 export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigate();
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
@@ -21,14 +19,15 @@ export const AuthContextProvider = ({ children }) => {
           credentials: "include",
         });
         console.log(res);
-        // check if status code is 401
-        if (res.status === 401) {
-          alert("Please enable cookies to use this app.");
-        }
 
         const data = await res.json();
         console.log(data);
         setAuthUser(data.user); // null or authenticated user object
+
+        // check if status code is 401
+        if (res.status === 401) {
+          alert("Please enable cookies to use this app.");
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -36,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     };
     checkUserLoggedIn();
-  }, [navigation]);
+  }, [setAuthUser]);
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser, loading }}>
