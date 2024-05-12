@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../constants";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -11,7 +11,7 @@ export const useAuthContext = () => {
 export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
+  const navigation = useNavigate();
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
@@ -36,7 +36,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     };
     checkUserLoggedIn();
-  }, [history]);
+  }, [navigation]);
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser, loading }}>
