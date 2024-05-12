@@ -11,6 +11,26 @@ export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const checkUserLoggedIn = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const res = await fetch(`${BASE_URL}/api/profile`, {
+  //         credentials: "include",
+  //       });
+  //       console.log(res);
+
+  //       const data = await res.json();
+  //       console.log(data);
+  //       setAuthUser(data.user); // null or authenticated user object
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   checkUserLoggedIn();
+  // }, [setAuthUser]);
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       setLoading(true);
@@ -20,9 +40,15 @@ export const AuthContextProvider = ({ children }) => {
         });
         console.log(res);
 
-        const data = await res.json();
-        console.log(data);
-        setAuthUser(data.user); // null or authenticated user object
+        if (res.status === 200) {
+          const data = await res.json();
+          console.log(data);
+          setAuthUser(data.user); // null or authenticated user object
+        } else {
+          // Handle non-200 status codes, e.g., logout the user
+          setAuthUser(null);
+          navigate("/");
+        }
       } catch (error) {
         console.error(error);
       } finally {
